@@ -1,0 +1,107 @@
+{
+  "mpn": "LMR51430",
+  "manufacturer": "Texas Instruments",
+  "source_file": "lmr51430.pdf",
+  "extracted_at": "2026-02-13T17:08:25.158215Z",
+  "params": {
+    "v_in_min": {
+      "value": 4.2,
+      "unit": "V",
+      "confidence": 0.95,
+      "source": "page_1_vision_table_1",
+      "verified_by": [
+        "vision",
+        "pdfplumber"
+      ],
+      "needs_review": false
+    },
+    "v_in_max": {
+      "value": 36.0,
+      "unit": "V",
+      "confidence": 0.95,
+      "source": "page_1_vision_table_1",
+      "verified_by": [
+        "vision",
+        "pdfplumber"
+      ],
+      "needs_review": false
+    },
+    "i_q": {
+      "value": 25.0,
+      "unit": "\u00b5A",
+      "confidence": 0.95,
+      "source": "page_1_vision_table_1",
+      "verified_by": [
+        "vision",
+        "pdfplumber"
+      ],
+      "needs_review": false
+    },
+    "i_q_max": {
+      "value": 40.0,
+      "unit": "\u00b5A",
+      "confidence": 0.95,
+      "source": "page_1_vision_table_1",
+      "verified_by": [
+        "vision",
+        "pdfplumber"
+      ],
+      "needs_review": false
+    },
+    "i_out_max": {
+      "value": 3.0,
+      "unit": "A",
+      "confidence": 0.95,
+      "source": "page_1_vision_table_1",
+      "verified_by": [
+        "vision",
+        "pdfplumber"
+      ],
+      "needs_review": false
+    },
+    "fsw_min": {
+      "value": 360.0,
+      "unit": "kHz",
+      "confidence": 0.95,
+      "source": "page_1_vision_table_1",
+      "verified_by": [
+        "vision",
+        "pdfplumber"
+      ],
+      "needs_review": false
+    },
+    "fsw": {
+      "value": 400.0,
+      "unit": "kHz",
+      "confidence": 0.95,
+      "source": "page_1_vision_table_1",
+      "verified_by": [
+        "vision",
+        "pdfplumber"
+      ],
+      "needs_review": false
+    },
+    "fsw_max": {
+      "value": 440.0,
+      "unit": "kHz",
+      "confidence": 0.95,
+      "source": "page_1_vision_table_1",
+      "verified_by": [
+        "vision",
+        "pdfplumber"
+      ],
+      "needs_review": false
+    },
+    "efficiency": {
+      "value": 92.0,
+      "unit": "%",
+      "confidence": 0.95,
+      "source": "page_1_vision_table_1",
+      "verified_by": [
+        "vision",
+        "pdfplumber"
+      ],
+      "needs_review": false
+    }
+  }
+}

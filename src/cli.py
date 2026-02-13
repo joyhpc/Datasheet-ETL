@@ -140,12 +140,16 @@ def cmd_export(args):
     with open(args.json_path, 'r') as f:
         data = json.load(f)
     
-    exporter = Exporter()
-    
     if args.format == "csv":
+        exporter = Exporter()
         output_path = args.output or args.json_path.replace('.json', '.csv')
         exporter.export_for_import_script([data], output_path)
         print(f"✅ Exported to: {output_path}")
+    elif args.format == "review":
+        from review_adapter import convert_file
+        output_path = args.output or args.json_path.replace('.json', '_review.json')
+        convert_file(args.json_path, output_path)
+        print(f"✅ Exported Review UI format to: {output_path}")
     else:
         print(f"❌ Unknown format: {args.format}")
         return 1
@@ -211,7 +215,7 @@ Examples:
     # Export command
     export_parser = subparsers.add_parser('export', help='Export to different format')
     export_parser.add_argument('json_path', help='Path to JSON result file')
-    export_parser.add_argument('--format', '-f', default='csv', help='Export format (csv)')
+    export_parser.add_argument('--format', '-f', default='csv', help='Export format (csv, review)')
     export_parser.add_argument('--output', '-o', help='Output file path')
     
     # Stats command
