@@ -1,0 +1,74 @@
+{
+  "metadata": {
+    "source_file": "test.pdf",
+    "mpn": "LMR51430",
+    "manufacturer": "Texas Instruments",
+    "total_pages": 32,
+    "extractor_version": "0.3"
+  },
+  "tables": [
+    {
+      "table_id": "table_p1_0",
+      "page_num": 1,
+      "title": "Electrical Characteristics",
+      "headers": [
+        "Parameter",
+        "Min",
+        "Typ",
+        "Max",
+        "Unit"
+      ],
+      "rows": [
+        {
+          "Parameter": "VIN Range",
+          "Min": "4.2",
+          "Typ": "",
+          "Max": "36",
+          "Unit": "V"
+        },
+        {
+          "Parameter": "IQ",
+          "Min": "",
+          "Typ": "25",
+          "Max": "40",
+          "Unit": "µA"
+        }
+      ],
+      "bbox": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "confidence": 0.9,
+      "extraction_method": "rule_based",
+      "raw_data": [
+        [
+          "Parameter",
+          "Min",
+          "Typ",
+          "Max",
+          "Unit"
+        ],
+        [
+          "VIN Range",
+          "4.2",
+          "",
+          "36",
+          "V"
+        ],
+        [
+          "IQ",
+          "",
+          "25",
+          "40",
+          "µA"
+        ]
+      ]
+    }
+  ],
+  "diagrams": [],
+  "parameters": {
+    "vin_max": 36
+  }
+}

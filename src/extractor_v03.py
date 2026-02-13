@@ -144,8 +144,8 @@ class TableExtractor:
         """
         tables = []
         
-        if self._pdfplumber_available:
-            tables = self._extract_with_pdfplumber(page_data, page_num)
+        # Always try rule-based extraction first (works with mock data too)
+        tables = self._extract_with_rules(page_data, page_num)
         
         # If no tables found or low confidence, try Vision Model
         if not tables or all(t.confidence < 0.7 for t in tables):
@@ -155,12 +155,12 @@ class TableExtractor:
         
         return tables
     
-    def _extract_with_pdfplumber(
+    def _extract_with_rules(
         self, 
         page_data: Dict[str, Any],
         page_num: int
     ) -> List[ExtractedTable]:
-        """Rule-based extraction using pdfplumber."""
+        """Rule-based extraction from page data."""
         tables = []
         raw_tables = page_data.get("tables", [])
         
@@ -210,10 +210,36 @@ class TableExtractor:
         page_num: int
     ) -> List[ExtractedTable]:
         """Vision Model extraction for complex tables."""
-        # This would call GPT-4o or similar
-        # For now, return empty list as placeholder
-        logger.info(f"Vision extraction requested for page {page_num}")
-        return []
+        tables = []
+        
+        if not self.vision_api_key:
+            logger.info(f"Vision extraction skipped (no API key) for page {page_num}")
+            return tables
+        
+        try:
+            from vision_client import VisionExtractionManager
+            
+            manager = VisionExtractionManager(
+                openai_api_key=self.vision_api_key,
+                default_model="gpt-4o-mini"
+            )
+            
+            # Would need to render page to image first
+            # For now, log the intent
+            logger.info(f"Vision extraction requested for page {page_num}")
+            
+            # TODO: Implement page-to-image rendering
+            # response = manager.extract_table(page_image_path)
+            # if response.success and response.parsed_json:
+            #     table = self._convert_vision_response(response, page_num)
+            #     tables.append(table)
+            
+        except ImportError:
+            logger.warning("vision_client module not available")
+        except Exception as e:
+            logger.error(f"Vision extraction error: {e}")
+        
+        return tables
     
     def _detect_headers(self, first_row: List[str]) -> List[str]:
         """Detect and normalize table headers."""
