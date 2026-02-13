@@ -357,15 +357,21 @@ class DoubleVerifier:
         # Calculate confidence
         confidence = self._calculate_confidence(conflicts, resolved_conflicts)
         
-        # Check for critical conflicts
+        # Check for critical conflicts (even if resolved, large differences need review)
         critical_conflicts = [
+            c for c in conflicts
+            if c.severity == ConflictSeverity.CRITICAL
+        ]
+        
+        # Check for unresolved high-severity conflicts
+        unresolved_high = [
             c for c in conflicts
             if c.severity in (ConflictSeverity.HIGH, ConflictSeverity.CRITICAL)
             and c.resolution is None
         ]
         
         # Determine status
-        if critical_conflicts:
+        if unresolved_high or (critical_conflicts and self._has_large_difference(critical_conflicts)):
             self._stats["needs_review_count"] += 1
             status = VerificationStatus.NEEDS_REVIEW
             resolution_method = "manual_required"
@@ -428,7 +434,8 @@ class DoubleVerifier:
                 
                 if not self._values_match(v_val, r_val):
                     conflict_type = self._classify_conflict(key, v_val, r_val)
-                    severity = self._assess_severity(key, v_val, r_val)
+                    # Pass row context for critical parameter detection
+                    severity = self._assess_severity(key, v_val, r_val, row_context=v_row)
                     
                     conflicts.append(ConflictDetail(
                         field=f"row[{i}].{key}",
@@ -501,7 +508,13 @@ class DoubleVerifier:
         # Default to text
         return "text"
     
-    def _assess_severity(self, field: str, v1: str, v2: str) -> ConflictSeverity:
+    def _assess_severity(
+        self, 
+        field: str, 
+        v1: str, 
+        v2: str,
+        row_context: Optional[Dict] = None
+    ) -> ConflictSeverity:
         """Assess the severity of a conflict."""
         field_lower = field.lower()
         
@@ -509,10 +522,17 @@ class DoubleVerifier:
         if "." in field_lower:
             field_lower = field_lower.split(".")[-1]
         
-        # Check if it's a critical parameter
+        # Check if it's a critical parameter by field name
         for critical in self.critical_params:
             if critical in field_lower:
                 return ConflictSeverity.CRITICAL
+        
+        # Check if row context contains critical parameter name
+        if row_context:
+            param_name = str(row_context.get("Parameter", "")).lower()
+            for critical in self.critical_params:
+                if critical in param_name:
+                    return ConflictSeverity.CRITICAL
         
         # Check numeric difference magnitude
         n1 = self.numeric_comparator._extract_number(v1)
@@ -608,6 +628,20 @@ class DoubleVerifier:
             confidence -= penalty
         
         return max(0.0, min(1.0, confidence))
+    
+    def _has_large_difference(self, conflicts: List[ConflictDetail]) -> bool:
+        """Check if any conflict has a large numeric difference (>10%)."""
+        for c in conflicts:
+            n1 = self.numeric_comparator._extract_number(c.vision_value)
+            n2 = self.numeric_comparator._extract_number(c.rule_value)
+            
+            if n1 is not None and n2 is not None:
+                max_val = max(abs(n1), abs(n2))
+                if max_val > 0:
+                    diff_pct = abs(n1 - n2) / max_val
+                    if diff_pct > 0.10:  # >10% difference
+                        return True
+        return False
     
     def get_stats(self) -> Dict[str, Any]:
         """Get verification statistics."""
