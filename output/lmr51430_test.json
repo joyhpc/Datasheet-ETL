@@ -1,0 +1,65 @@
+{
+  "metadata": {
+    "source_file": "datasheets/lmr51430.pdf",
+    "mpn": "LMR51430",
+    "manufacturer": "Texas Instruments",
+    "total_pages": 32,
+    "extractor_version": "0.3"
+  },
+  "tables": [
+    {
+      "table_id": "table_p5_0",
+      "page_num": 5,
+      "title": "Electrical Characteristics",
+      "headers": [
+        "Parameter",
+        "Test_Conditions",
+        "Min",
+        "Typ",
+        "Max",
+        "Unit"
+      ],
+      "rows": [
+        {
+          "Parameter": "VIN Operating Range",
+          "Test_Conditions": "",
+          "Min": "4.2",
+          "Typ": "",
+          "Max": "36",
+          "Unit": "V"
+        },
+        {
+          "Parameter": "VIN UVLO Threshold",
+          "Test_Conditions": "Rising",
+          "Min": "3.8",
+          "Typ": "4.1",
+          "Max": "4.4",
+          "Unit": "V"
+        },
+        {
+          "Parameter": "Quiescent Current",
+          "Test_Conditions": "Non-switching, VFB = 1.1V",
+          "Min": "",
+          "Typ": "25",
+          "Max": "40",
+          "Unit": "µA"
+        }
+      ],
+      "bbox": [
+        50,
+        200,
+        550,
+        400
+      ],
+      "confidence": 0.9,
+      "extraction_method": "rule_based",
+      "raw_data": null
+    }
+  ],
+  "diagrams": [],
+  "parameters": {
+    "vin_max": 36,
+    "vin_min": 4.2,
+    "fsw_typ": 2.1
+  }
+}
