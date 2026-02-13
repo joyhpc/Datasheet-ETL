@@ -1,0 +1,100 @@
+{
+  "metadata": {
+    "source_file": "lmr51430.pdf",
+    "pipeline_version": "0.4",
+    "extraction_method": "vision_first_double_verified",
+    "vision_model": "gpt-4o-mini"
+  },
+  "verification": {
+    "status": "verified",
+    "confidence": 0.99,
+    "resolution_method": "auto_resolved",
+    "conflict_count": 1
+  },
+  "tables": [
+    {
+      "table_id": "vision_table_1",
+      "title": "Electrical Characteristics",
+      "headers": [
+        "Parameter",
+        "Test Condition",
+        "Min",
+        "Typ",
+        "Max",
+        "Unit"
+      ],
+      "rows": [
+        {
+          "Parameter": "Input Voltage Range",
+          "Test Condition": "",
+          "Min": "4.2",
+          "Typ": "",
+          "Max": "36",
+          "Unit": "V"
+        },
+        {
+          "Parameter": "Quiescent Current",
+          "Test Condition": "VFB = 1.1V",
+          "Min": "",
+          "Typ": "25",
+          "Max": "40",
+          "Unit": "µA"
+        },
+        {
+          "Parameter": "Output Current",
+          "Test Condition": "Continuous",
+          "Min": "",
+          "Typ": "",
+          "Max": "3",
+          "Unit": "A"
+        },
+        {
+          "Parameter": "Switching Frequency",
+          "Test Condition": "",
+          "Min": "360",
+          "Typ": "400",
+          "Max": "440",
+          "Unit": "kHz"
+        },
+        {
+          "Parameter": "Efficiency",
+          "Test Condition": "VIN=12V, VOUT=5V, IOUT=2A",
+          "Min": "",
+          "Typ": "92",
+          "Max": "",
+          "Unit": "%"
+        }
+      ],
+      "confidence": 0.95,
+      "extraction_method": "vision",
+      "model": "gpt-4o-mini",
+      "cost_usd": 0.002
+    }
+  ],
+  "parameters": {
+    "input_voltage_range_min": 4.2,
+    "input_voltage_range_max": 36.0,
+    "input_voltage_range_unit": "V",
+    "quiescent_current_typ": 25.0,
+    "quiescent_current_max": 40.0,
+    "quiescent_current_unit": "µA",
+    "output_current_max": 3.0,
+    "output_current_unit": "A",
+    "switching_frequency_min": 360.0,
+    "switching_frequency_typ": 400.0,
+    "switching_frequency_max": 440.0,
+    "switching_frequency_unit": "kHz",
+    "efficiency_typ": 92.0,
+    "efficiency_unit": "%"
+  },
+  "conflicts": [
+    {
+      "field": "table_id",
+      "vision_value": "vision_table_1",
+      "rule_value": "rule_table_1",
+      "severity": "low",
+      "resolution": "vision_wins",
+      "resolved_value": "vision_table_1"
+    }
+  ]
+}
