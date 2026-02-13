@@ -1,0 +1,2 @@
+MPN,Manufacturer,Category,Description,Vin_min,Vin_max,Vout_min,Vout_max,Iout_max,Iq_typ,Efficiency_typ,Frequency_typ,Package,Status,Datasheet_URL,Notes
+LMR51430,,Buck Converter,,4.2,36.0,,,3.0,25.0,92.0,400.0,,Active,,Extracted by Datasheet-ETL v0.4 (confidence: 99%)
